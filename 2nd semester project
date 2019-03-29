@@ -1,0 +1,71 @@
+#include<iostream>
+using namespace std;
+class DualPrimes
+{
+	public:
+	int N,P;
+	int Not_dual[30];
+	int prime1,prime2;
+	DualPrimes()
+	{
+		cout<<"Enter the number you want to go upto: ";
+		cin>>N;
+	}
+	void find();
+	void display_notdual();
+};
+void DualPrimes::find()
+{
+	int p=0;
+	for(int i=2;i<N;i++)
+	{
+		int diff;
+		int count=0;
+		for(int j=1;j<=i;j++)
+		{
+			if(i%j==0)
+			count++;
+		}
+		if(count==2)
+		{
+			if(prime1==0)
+			{
+				prime1=i;
+				continue;
+			}
+			else
+			{
+				prime2=i;
+				diff=prime2-prime1;
+				if(diff==2)
+				{
+				cout<<"("<<prime1<<","<<prime2<<") ";
+				prime1=0;
+				}
+				else
+				{
+					Not_dual[p++]=prime1;
+					Not_dual[p++]=prime2;
+					prime1=0;
+					prime2=0;
+				}
+			
+			}		
+		}
+	}
+	P=p;
+}
+void DualPrimes::display_notdual()
+{
+	cout<<"\nThe primes that are not dual primes: \n";
+	for(int i=0;i<P;i++)
+	{
+		cout<<Not_dual[i]<<" ";
+	}
+}
+int main()
+{
+	DualPrimes O;
+	O.find();
+	O.display_notdual();
+}
